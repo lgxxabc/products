@@ -17,3 +17,14 @@ print(products)
 # structure: products = [ [n|p] | [n|p] | [n|p] ]
 # e.g. [['a', '1'], ['b', '2'], ['c', '3']]
 
+for product in products:
+	print(product)
+# ['a', '1']
+# ['b', '2']
+# ['c', '3']
+
+for product in products:
+	print(product[0])
+# a
+# b
+# c
