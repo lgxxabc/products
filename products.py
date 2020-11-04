@@ -17,14 +17,23 @@ print(products)
 # structure: products = [ [n|p] | [n|p] | [n|p] ]
 # e.g. [['a', '1'], ['b', '2'], ['c', '3']]
 
-for product in products:
-	print(product)
-# ['a', '1']
-# ['b', '2']
-# ['c', '3']
+# for product in products:
+# 	print(product)
+# # ['a', '1']
+# # ['b', '2']
+# # ['c', '3']
 
-for product in products:
-	print(product[0])
-# a
-# b
-# c
+# for product in products:
+# 	print(product[0])
+# # a
+# # b
+# # c
+
+# # String calculation
+# 'abc' + '123' = 'abc123'
+# 'abc' * 3 = 'abcabcabc'
+
+# Write the outputs in a file 
+with open('products.csv', 'w') as f:
+	for p in products:
+		f.write(p[0] + ',' + p[1] + '\n')
