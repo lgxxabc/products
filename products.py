@@ -35,5 +35,15 @@ print(products)
 
 # Write the outputs in a file 
 with open('products.csv', 'w') as f:
+# with open('products.csv', 'w', encoding = 'utf-8') as f:
+# if we want to print Chinese characters, then need to add encoding
+	f.write('Product, Price\n')		# add headers
 	for p in products:
 		f.write(p[0] + ',' + p[1] + '\n')
+# If the messy codes are still there in the excel sheet, that's because
+# excel does not using ctf-8 to read the data
+# Solution:
+# In excel: data > get data > From text/csv
+# encoding: utf-8
+# delimiter: comma
+
