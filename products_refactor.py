@@ -1,39 +1,24 @@
-# Refactor the func.py
+# Refactor(重構) the func.py
+# 中心思想：每個function只做一件事情
 # Check if the file exists, before reading it.
 import os		# operating system
 
 # 1. Read from a file
 def read_file(filename):
 	products = []
-	if os.path.isfile(filename):
-		print('File exists.')
-		
-		# Read from file 'products.csv'
-		# Steps:
-		# 1. .split('.')，用comma來做分割
-		# 2. .strip()來除掉換行符號(\n)
-		# 3. 加上encoding = 'utf-8'來去除UnicodeDecodeError
-		with open(filename, 'r', encoding = 'utf-8') as f:
-			for line in f:
-				# get rid of the header when reading the file
-				if 'product, price' in line:
-					continue
+	with open(filename, 'r', encoding = 'utf-8') as f:
+		for line in f:
+			# get rid of the header when reading the file
+			if 'product, price' in line:
+				continue
 
-				# s = line.strip().split(',')
-				# name = s[0]
-				# price = s[1]
-				# this is equal to:
-				name, price = line.strip().split(',')
-				# 把讀到的内容裝進list
-				products.append([name, price])
-		print(products)
-		# Outputs:
-		# products: 讓user重複輸入他買過的products
-		# while loop vs. for loop
-		# when we are not sure how many loops are there, we choose while loop
-
-	else:
-		print('Could not find the file.')
+			# s = line.strip().split(',')
+			# name = s[0]
+			# price = s[1]
+			# this is equal to:
+			name, price = line.strip().split(',')
+			# 把讀到的内容裝進list
+			products.append([name, price])
 	return products
 
 
@@ -47,6 +32,7 @@ def user_input(products):
 		# p = []
 		# p.append(name)
 		# p.append(price)
+		price = int(price)
 		p = [name, price]
 		products.append(p)
 		# Or: products.append([name, price])
@@ -63,7 +49,7 @@ def user_input(products):
 
 
 # 3. 印出所有商品
-def user_input(products):
+def print_products(products):
 	for product in products:
 		print(product[0])
 	# a
@@ -91,8 +77,18 @@ def write_file(filename, products):
 	# delimiter: comma
 
 
-# Use the function 1~4
-products = read_file('products.csv')
-products = user_input(products)
-print_products(products)
-write_file('products.csv', products)
+# Define the main function
+def main():
+	filename = 'products.csv'
+	if os.path.isfile(filename):
+		print('File exists.')
+		products = read_file(filename)
+	else:
+		print('Could not find the file.')
+
+	products = user_input(products)
+	print_products(products)
+	write_file('products.csv', products)
+
+# To operate the main function
+main()
